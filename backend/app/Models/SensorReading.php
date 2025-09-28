@@ -11,4 +11,9 @@ class SensorReading extends Model
     protected $casts = [
         'payload' => 'array',
     ];
+
+    public function scopeTake($query, $limit)
+    {
+        return $query->take($limit);
+    }
 }

@@ -10,6 +10,4 @@ use App\Models\SensorReading;
 Route::get('sensors/latest', [SensorController::class, 'latest']);
 Route::get('sensors', [SensorController::class, 'index']);
 
-Route::get('/sensors', function () {
-    return SensorReading::latest()->take(50)->get();
-});
+Route::get('/sensors', fn() => SensorReading::latest()->take(50)->get());
