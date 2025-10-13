@@ -6,7 +6,7 @@ import { useData } from "../context/DataContext";
 const Sensor = () => {
   const { devices } = useData();
 
-  // Hitung total sensor dari devices
+ 
   const totalSensor = devices.length;
   const totalOn = devices.filter((d) => d.status).length;
   const totalOff = devices.filter((d) => !d.status).length;
@@ -15,7 +15,7 @@ const Sensor = () => {
     <div className="p-10 min-h-screen bg-[#0E1014] text-white">
       <h1 className="text-3xl font-bold mb-8 text-center">Sensor</h1>
 
-      {/* Ringkasan Statistik */}
+     
       <div className="grid sm:grid-cols-3 gap-4 mb-10">
         <div className="bg-[#171B23]/80 rounded-2xl p-5 text-center">
           <Activity className="mx-auto text-blue-400 mb-2" size={28} />
@@ -34,7 +34,6 @@ const Sensor = () => {
         </div>
       </div>
 
-      {/* Tabel Sensor */}
       <div className="overflow-x-auto rounded-2xl bg-[#171B23]/80 shadow-lg">
         <table className="min-w-full border-collapse">
           <thead>

@@ -48,7 +48,7 @@ const OverviewKota = () => {
     <div className="space-y-6">
       <h1 className="text-2xl font-bold mb-4">Overview Kota</h1>
 
-      {/** Map */}
+
       <section className="bg-[#1e1f25] p-6 rounded-2xl shadow">
         <h2 className="text-lg font-semibold mb-4">Peta Kondisi Kota</h2>
         <MapContainer
@@ -80,7 +80,7 @@ const OverviewKota = () => {
         </MapContainer>
       </section>
 
-      {/** Charts */}
+      
       <section className="bg-[#1e1f25] p-6 rounded-2xl shadow">
         <h2 className="text-lg font-semibold mb-4">Weekly Overview</h2>
         <div className="h-64">

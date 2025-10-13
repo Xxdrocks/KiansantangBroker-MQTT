@@ -10,7 +10,7 @@ const Overview = () => {
     <div className="p-8 text-white min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
       <h1 className="text-3xl font-bold mb-6 text-center">Overview</h1>
 
-      {/** Tabs */}
+      
       <div className="flex justify-center mb-8 relative">
         <div className="flex bg-gray-800 rounded-xl shadow-lg p-1">
           {["personal", "city"].map((tab) => (

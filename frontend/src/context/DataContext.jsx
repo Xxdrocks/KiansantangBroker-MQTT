@@ -58,7 +58,7 @@ export const DataProvider = ({ children }) => {
   const sensorOn = devices.filter((d) => d.status).length;
   const sensorOff = devices.filter((d) => !d.status).length;
 
-  // Overview per kota
+  
   const cityOverview = devices.reduce((acc, d) => {
     if (!acc[d.city])
       acc[d.city] = {
@@ -91,7 +91,7 @@ export const DataProvider = ({ children }) => {
       off: sensorOff,
       error: 0,
     },
-    devices: devices.filter((d) => d.city === "Jakarta"), // contoh milik user Jakarta
+    devices: devices.filter((d) => d.city === "Jakarta"), 
   };
 
   return (

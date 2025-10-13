@@ -4,7 +4,7 @@ import { useData } from "../context/DataContext";
 const Dashboard = () => {
   const { devices } = useData();
 
-  // Fungsi menentukan warna plug berdasarkan kWh
+  
   const getPlugImage = (kwh) => {
     if (kwh < 100) return "/images/plugswhite.png";
     else if (kwh < 200) return "/images/plugsyellow.png";
@@ -12,7 +12,7 @@ const Dashboard = () => {
     else return "/images/plugsred.png";
   };
 
-  // Fungsi menentukan status level
+ 
   const getStatusLevel = (kwh) => {
     if (kwh < 100) return "Aman";
     if (kwh < 200) return "Sedang";
@@ -27,7 +27,7 @@ const Dashboard = () => {
       </h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Carbon Emission / Overview */}
+        
         <div className="bg-gradient-to-r from-[#6A759B] to-[#21273D] rounded-2xl p-6 shadow-lg relative overflow-hidden h-[280px]">
           <div className="flex flex-col z-10 relative">
             <div className="flex items-center bg-white text-black rounded-full px-4 py-1 w-fit">
@@ -53,7 +53,7 @@ const Dashboard = () => {
           />
         </div>
 
-        {/* Today's Highlight */}
+        
         <div className="bg-[#1b1d22] rounded-2xl p-6 shadow-md">
           <h2 className="text-[20px] font-semibold mb-6">Today's Highlight</h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
@@ -81,7 +81,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* 7 Days Forecast */}
+      
       <div className="mt-8 bg-[#1b1d22] rounded-2xl p-6 shadow-md">
         <h2 className="text-[20px] font-semibold mb-5">7 Days Forecast</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">

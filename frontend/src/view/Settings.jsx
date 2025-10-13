@@ -4,7 +4,7 @@ const Settings = () => {
   const [darkMode, setDarkMode] = useState(true);
   const [editMode, setEditMode] = useState(false);
 
-  // Data user (dummy sementara, nanti bisa diganti fetch dari backend)
+ 
   const [userData, setUserData] = useState({
     firstName: "Hidayah",
     lastName: "Muhammad",
@@ -17,13 +17,13 @@ const Settings = () => {
     kodepos: "13110",
   });
 
-  // Handle perubahan input
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Simpan perubahan (sementara hanya console.log)
+  
   const handleSave = () => {
     setEditMode(false);
     console.log("Data tersimpan:", userData);
@@ -34,7 +34,7 @@ const Settings = () => {
       <h1 className="text-3xl font-bold mb-8">Settings</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Left Frame */}
+       
         <div
           className={`${
             darkMode ? "bg-[#1f2025]" : "bg-gray-200"
@@ -89,7 +89,7 @@ const Settings = () => {
           </div>
         </div>
 
-        {/* Right Frame */}
+        
         <div
           className={`${
             darkMode ? "bg-[#1f2025]" : "bg-gray-200"

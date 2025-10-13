@@ -4,16 +4,16 @@ import { useData } from "../context/DataContext";
 const Notification = () => {
   const { devices } = useData();
 
-  // Fungsi untuk menentukan level notif berdasarkan konsumsi harian
+
   const getLevel = (daily) => {
-    const value = parseFloat(daily); // "150 kWh" -> 150
+    const value = parseFloat(daily); 
     if (value <= 100) return "Aman";
     if (value <= 200) return "Sedang";
     if (value <= 300) return "Bahaya";
     return "Kritis";
   };
 
-  // Fungsi untuk mendapatkan warna sesuai level
+ 
   const getColor = (level) => {
     switch (level) {
       case "Aman":
@@ -33,7 +33,7 @@ const Notification = () => {
     <div className="p-10 min-h-screen text-white bg-[#0E1014]">
       <h1 className="text-3xl font-bold mb-8">Notification</h1>
 
-      {/* Legend */}
+     
       <div className="flex items-center space-x-3 mb-6">
         <span className="font-semibold">Riwayat Notification</span>
         <div className="flex space-x-2">
@@ -45,7 +45,7 @@ const Notification = () => {
         </div>
       </div>
 
-      {/* List Notifikasi */}
+      
       <div className="space-y-4">
         {devices.map((device) => {
           const level = getLevel(device.daily);

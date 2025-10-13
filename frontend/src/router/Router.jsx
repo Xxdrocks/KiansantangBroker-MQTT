@@ -16,10 +16,10 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <div className="flex">
-        {/* Sidebar di kiri */}
+        
         <Sidebar />
 
-        {/* Konten utama */}
+       
         <div className="flex-1 p-8 ml-28">
           <Routes>
             <Route path="/" element={<Dashboard />} />

@@ -49,12 +49,11 @@ const Profile = () => {
             </p>
           </div>
         </div>
-
-        {/* Right: Sensor Stats & Info */}
+ 
         <div className="col-span-2 bg-[#1f2025] rounded-2xl p-8 shadow-lg">
           <h2 className="text-lg font-semibold mb-6">Statistik Sensor</h2>
 
-          {/* Sensor Stats Grid */}
+          
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
             <div className="bg-[#2b2d33] rounded-xl p-5 text-center hover:scale-105 transition-all">
               <FaPlug className="text-blue-400 text-3xl mx-auto mb-2" />
@@ -84,7 +83,7 @@ const Profile = () => {
             </div>
           </div>
 
-          {/* Info Detail */}
+          
           <h2 className="text-lg font-semibold mb-4">Informasi Akun</h2>
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div className="bg-[#2b2d33] p-4 rounded-xl">

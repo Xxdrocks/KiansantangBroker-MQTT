@@ -6,7 +6,7 @@ const Users = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/users") // sesuaikan base URL backend kamu
+    axios.get("http://127.0.0.1:8000/api/users") 
       .then((res) => {
         setUsers(res.data);
         setLoading(false);

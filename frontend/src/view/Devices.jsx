@@ -48,7 +48,7 @@ const Devices = () => {
     <div className="p-10 min-h-screen bg-[#0E1014] text-white">
       <h1 className="text-3xl font-bold mb-8 text-center">Devices</h1>
 
-      {/* Ringkasan */}
+       
       <div className="grid sm:grid-cols-3 gap-4 mb-10">
         <div className="bg-[#171B23]/80 rounded-2xl p-4 text-center">
           <p className="text-gray-400 text-sm">Total Devices</p>

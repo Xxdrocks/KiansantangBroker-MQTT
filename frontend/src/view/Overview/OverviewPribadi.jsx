@@ -21,13 +21,13 @@ const OverviewPribadi = () => {
   const yearlyData = user.devices.map((d) => ({
     name: d.name,
     kWh: d.monthly * 12,
-  })); // contoh yearly
+  })); 
 
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-bold mb-4">Overview Pribadi</h1>
 
-      {/** Weekly */}
+
       <section className="bg-[#1e1f25] p-6 rounded-2xl shadow">
         <h2 className="text-lg font-semibold mb-4">Weekly Overview</h2>
         <div className="h-64">
@@ -43,7 +43,7 @@ const OverviewPribadi = () => {
         </div>
       </section>
 
-      {/** Monthly */}
+
       <section className="bg-[#1e1f25] p-6 rounded-2xl shadow">
         <h2 className="text-lg font-semibold mb-4">Monthly Overview</h2>
         <div className="h-64">
@@ -59,7 +59,6 @@ const OverviewPribadi = () => {
         </div>
       </section>
 
-      {/** Yearly */}
       <section className="bg-[#1e1f25] p-6 rounded-2xl shadow">
         <h2 className="text-lg font-semibold mb-4">Yearly Overview</h2>
         <div className="h-64">
