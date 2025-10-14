@@ -1,6 +1,7 @@
 import React from "react";
 import Router from "./router/Router";
 import { DataProvider } from "./context/DataContext";
+import "./constant/index";
 
 const App = () => {
   return (
@@ -16,6 +17,8 @@ const App = () => {
         </div>
       </div>
     </DataProvider>
+
+
   );
 };
 
