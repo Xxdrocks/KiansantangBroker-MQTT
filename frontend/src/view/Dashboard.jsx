@@ -1,12 +1,10 @@
 // src/view/Dashboard.jsx
-import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import { useData } from "../context/DataContext";
-import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const { devices } = useData();
-  const { token, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const getPlugImage = (kwh) => {
@@ -27,34 +25,9 @@ const Dashboard = () => {
     <div className="bg-[#0E1014] min-h-screen text-white px-6 py-8">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Dashboard</h1>
-
-        {/* Tombol Login/Register/Logout */}
-        {!token ? (
-          <div className="flex gap-3">
-            <button
-              onClick={() => navigate("/login")}
-              className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-lg text-white"
-            >
-              Login
-            </button>
-            <button
-              onClick={() => navigate("/register")}
-              className="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-lg text-white"
-            >
-              Register
-            </button>
-          </div>
-        ) : (
-          <button
-            onClick={logout}
-            className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg text-white"
-          >
-            Logout
-          </button>
-        )}
       </div>
 
-      {/* Bagian konten kamu sebelumnya tetap sama */}
+      {/* Bagian konten utama */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Carbon Emission */}
         <div className="bg-gradient-to-r from-[#6A759B] to-[#21273D] rounded-2xl p-6 shadow-lg relative overflow-hidden h-[280px]">
