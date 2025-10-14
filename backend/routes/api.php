@@ -1,13 +1,12 @@
-Route::post('/auth/register',[AuthController::class,'register']);
-Route::post('/auth/login',[AuthController::class,'login']);
+<?php
 
-Route::middleware('auth:sanctum')->group(function(){
-    Route::post('/auth/logout',[AuthController::class,'logout']);
-    Route::get('/overview/personal',[OverviewController::class,'personal']);
-    Route::get('/overview/city',[OverviewController::class,'city']);
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
-    Route::middleware('admin')->group(function(){
-        Route::apiResource('admin/users', Admin\UserController::class);
-        Route::apiResource('admin/devices', Admin\DeviceController::class);
-    });
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::middleware('auth:api')->group(function () {
+    Route::get('/me', [AuthController::class, 'me']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 });

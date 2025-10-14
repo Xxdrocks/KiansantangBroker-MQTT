@@ -11,7 +11,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Tempat untuk mendaftarkan binding service atau konfigurasi tambahan.
     }
 
     /**
@@ -19,6 +19,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Jalankan hal-hal yang dibutuhkan ketika aplikasi bootstrap.
     }
 }

@@ -1,10 +1,14 @@
-import React from "react";
+// src/view/Dashboard.jsx
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { useData } from "../context/DataContext";
+import { AuthContext } from "../context/AuthContext";
 
 const Dashboard = () => {
   const { devices } = useData();
+  const { token, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  
   const getPlugImage = (kwh) => {
     if (kwh < 100) return "/images/plugswhite.png";
     else if (kwh < 200) return "/images/plugsyellow.png";
@@ -12,7 +16,6 @@ const Dashboard = () => {
     else return "/images/plugsred.png";
   };
 
- 
   const getStatusLevel = (kwh) => {
     if (kwh < 100) return "Aman";
     if (kwh < 200) return "Sedang";
@@ -22,12 +25,38 @@ const Dashboard = () => {
 
   return (
     <div className="bg-[#0E1014] min-h-screen text-white px-6 py-8">
-      <h1 className="text-3xl font-bold mb-8 text-center sm:text-left">
-        Dashboard
-      </h1>
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-3xl font-bold">Dashboard</h1>
 
+        {/* Tombol Login/Register/Logout */}
+        {!token ? (
+          <div className="flex gap-3">
+            <button
+              onClick={() => navigate("/login")}
+              className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-lg text-white"
+            >
+              Login
+            </button>
+            <button
+              onClick={() => navigate("/register")}
+              className="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-lg text-white"
+            >
+              Register
+            </button>
+          </div>
+        ) : (
+          <button
+            onClick={logout}
+            className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg text-white"
+          >
+            Logout
+          </button>
+        )}
+      </div>
+
+      {/* Bagian konten kamu sebelumnya tetap sama */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        
+        {/* Carbon Emission */}
         <div className="bg-gradient-to-r from-[#6A759B] to-[#21273D] rounded-2xl p-6 shadow-lg relative overflow-hidden h-[280px]">
           <div className="flex flex-col z-10 relative">
             <div className="flex items-center bg-white text-black rounded-full px-4 py-1 w-fit">
@@ -53,7 +82,7 @@ const Dashboard = () => {
           />
         </div>
 
-        
+        {/* Today's Highlight */}
         <div className="bg-[#1b1d22] rounded-2xl p-6 shadow-md">
           <h2 className="text-[20px] font-semibold mb-6">Today's Highlight</h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
@@ -81,7 +110,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      
+      {/* 7 Days Forecast */}
       <div className="mt-8 bg-[#1b1d22] rounded-2xl p-6 shadow-md">
         <h2 className="text-[20px] font-semibold mb-5">7 Days Forecast</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">

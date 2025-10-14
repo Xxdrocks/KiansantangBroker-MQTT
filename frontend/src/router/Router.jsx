@@ -11,30 +11,50 @@ import Settings from "../view/Settings";
 import Profile from "../view/Profile";
 import OverviewPribadi from "../view/Overview/OverviewPribadi";
 import OverviewKota from "../view/Overview/OverviewKota";
+import Register from "../view/Register";
+import Login from "../view/Login";
+import { AuthProvider } from "../context/AuthContext";
+import ProtectedRoute from "../utils/ProtectedRoute";
 
 const AppRouter = () => {
   return (
-    <BrowserRouter>
-      <div className="flex">
-        
-        <Sidebar />
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          {/* Halaman login & register */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
-       
-        <div className="flex-1 p-8 ml-28">
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/overview" element={<Overview />} />
-            <Route path="/devices" element={<Devices />} />
-            <Route path="/sensor" element={<Sensor />} />
-            <Route path="/notification" element={<Notification />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/overview/pribadi" element={<OverviewPribadi />} />
-            <Route path="/overview/kota" element={<OverviewKota />} />
-          </Routes>
-        </div>
-      </div>
-    </BrowserRouter>
+          {/* Halaman utama yang butuh login */}
+          <Route
+            path="/*"
+            element={
+              <ProtectedRoute>
+                <div className="flex">
+                  <Sidebar />
+                  <div className="flex-1 p-8 ml-28">
+                    <Routes>
+                      <Route path="/" element={<Dashboard />} />
+                      <Route path="/overview" element={<Overview />} />
+                      <Route path="/devices" element={<Devices />} />
+                      <Route path="/sensor" element={<Sensor />} />
+                      <Route path="/notification" element={<Notification />} />
+                      <Route path="/settings" element={<Settings />} />
+                      <Route path="/profile" element={<Profile />} />
+                      <Route
+                        path="/overview/pribadi"
+                        element={<OverviewPribadi />}
+                      />
+                      <Route path="/overview/kota" element={<OverviewKota />} />
+                    </Routes>
+                  </div>
+                </div>
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 };
 
