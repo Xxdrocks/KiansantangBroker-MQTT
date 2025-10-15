@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\InputEmission;
 use Illuminate\Http\Request;
 
-class InputEmissionController 
+class InputEmissionController
 {
     public function index()
     {
