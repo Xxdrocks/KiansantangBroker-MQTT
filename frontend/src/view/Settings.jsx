@@ -15,15 +15,32 @@ const Settings = () => {
     kodepos: "",
   });
 
+  // Ganti ke false nanti kalau backend temanmu sudah aktif
+  const SIMULASI_MODE = true;
   const API_URL = "http://127.0.0.1:8000/api/users";
 
   useEffect(() => {
+    if (SIMULASI_MODE) {
+      console.log("🔹 SIMULASI MODE AKTIF: Data dummy digunakan.");
+      // Data dummy supaya tetap muncul
+      setUserData({
+        id: 1,
+        name: "Hidayah Muhammad Fadillah",
+        email: "hidayah@example.com",
+        nomer: "08123456789",
+        kecamatan: "Kebayoran Baru",
+        kelurahan: "Gandaria",
+        kodepos: "12140",
+      });
+      return;
+    }
+
     axios
       .get(`${API_URL}/1`)
       .then((res) => {
         setUserData(res.data);
       })
-      .catch((err) => console.error("Gagal ambil data:", err));
+      .catch((err) => console.error("❌ Gagal ambil data:", err));
   }, []);
 
   const handleChange = (e) => {
@@ -31,9 +48,18 @@ const Settings = () => {
     setUserData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // 🔹 Simpan data ke backend (PUT /api/users/{id})
+  // ✅ Simpan data ke backend (PUT /api/users/{id})
   const handleSave = async () => {
+    if (SIMULASI_MODE) {
+      console.log("🔹  Data disimpan:", userData);
+      alert("✅  Data berhasil diperbarui!");
+      setEditMode(false);
+      return;
+    }
+
     try {
+      console.log("Data dikirim ke backend:", userData);
+
       await axios.put(`${API_URL}/${userData.id}`, {
         name: userData.name,
         email: userData.email,
@@ -42,27 +68,37 @@ const Settings = () => {
         kelurahan: userData.kelurahan,
         kodepos: userData.kodepos,
       });
-      alert("Data berhasil diperbarui!");
+
+      alert("✅ Data berhasil diperbarui!");
       setEditMode(false);
     } catch (error) {
-      console.error("Gagal update data:", error);
-      alert("Gagal menyimpan perubahan!");
+      console.error("❌ Gagal update data:", error.response || error);
+      alert(
+        "❌ Gagal menyimpan perubahan!\n" +
+          (error.response?.data?.message ||
+            JSON.stringify(error.response?.data) ||
+            "Periksa console untuk detail.")
+      );
     }
   };
 
   return (
-    <div className={`p-10 ${darkMode ? "text-white" : "text-black"}`}>
-      <h1 className="text-3xl font-bold mb-8">Settings</h1>
+    <div
+      className={`min-h-screen p-10 transition-all duration-500 ${
+        darkMode ? "bg-[#121212] text-white" : "bg-gray-100 text-black"
+      }`}
+    >
+      <h1 className="text-3xl font-bold mb-8">⚙️ Settings</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* --- CARD PROFIL --- */}
         <div
           className={`${
-            darkMode ? "bg-[#1f2025]" : "bg-gray-200"
+            darkMode ? "bg-[#1f2025]" : "bg-white"
           } rounded-2xl p-6 shadow-lg space-y-6`}
         >
           <div className="flex flex-col items-center">
-            <div className="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center text-white text-3xl font-bold">
+            <div className="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center text-white text-3xl font-bold shadow-md">
               {userData.name ? userData.name.charAt(0).toUpperCase() : "?"}
             </div>
             <h2 className="mt-4 font-semibold text-lg">{userData.name}</h2>
@@ -105,7 +141,7 @@ const Settings = () => {
         {/* --- FORM EDIT --- */}
         <div
           className={`${
-            darkMode ? "bg-[#1f2025]" : "bg-gray-200"
+            darkMode ? "bg-[#1f2025]" : "bg-white"
           } rounded-2xl p-6 shadow-lg`}
         >
           <h2 className="font-semibold mb-5">User Settings</h2>
@@ -117,9 +153,9 @@ const Settings = () => {
               value={userData.name}
               onChange={handleChange}
               placeholder="Nama Lengkap"
-              className={`col-span-2 p-2 rounded text-white outline-none ${
-                darkMode ? "bg-[#2b2d33]" : "bg-gray-300 text-black"
-              } ${!editMode && "opacity-50"}`}
+              className={`col-span-2 p-2 rounded outline-none ${
+                darkMode ? "bg-[#2b2d33] text-white" : "bg-gray-200 text-black"
+              } ${!editMode && "opacity-60 cursor-not-allowed"}`}
             />
             <input
               name="email"
@@ -127,9 +163,9 @@ const Settings = () => {
               value={userData.email}
               onChange={handleChange}
               placeholder="Email"
-              className={`col-span-2 p-2 rounded text-white outline-none ${
-                darkMode ? "bg-[#2b2d33]" : "bg-gray-300 text-black"
-              } ${!editMode && "opacity-50"}`}
+              className={`col-span-2 p-2 rounded outline-none ${
+                darkMode ? "bg-[#2b2d33] text-white" : "bg-gray-200 text-black"
+              } ${!editMode && "opacity-60 cursor-not-allowed"}`}
             />
             <input
               name="nomer"
@@ -137,9 +173,9 @@ const Settings = () => {
               value={userData.nomer}
               onChange={handleChange}
               placeholder="Nomor Telepon"
-              className={`col-span-2 p-2 rounded text-white outline-none ${
-                darkMode ? "bg-[#2b2d33]" : "bg-gray-300 text-black"
-              } ${!editMode && "opacity-50"}`}
+              className={`col-span-2 p-2 rounded outline-none ${
+                darkMode ? "bg-[#2b2d33] text-white" : "bg-gray-200 text-black"
+              } ${!editMode && "opacity-60 cursor-not-allowed"}`}
             />
             <input
               name="kecamatan"
@@ -147,9 +183,9 @@ const Settings = () => {
               value={userData.kecamatan}
               onChange={handleChange}
               placeholder="Kecamatan"
-              className={`p-2 rounded text-white outline-none ${
-                darkMode ? "bg-[#2b2d33]" : "bg-gray-300 text-black"
-              } ${!editMode && "opacity-50"}`}
+              className={`p-2 rounded outline-none ${
+                darkMode ? "bg-[#2b2d33] text-white" : "bg-gray-200 text-black"
+              } ${!editMode && "opacity-60 cursor-not-allowed"}`}
             />
             <input
               name="kelurahan"
@@ -157,9 +193,9 @@ const Settings = () => {
               value={userData.kelurahan}
               onChange={handleChange}
               placeholder="Kelurahan"
-              className={`p-2 rounded text-white outline-none ${
-                darkMode ? "bg-[#2b2d33]" : "bg-gray-300 text-black"
-              } ${!editMode && "opacity-50"}`}
+              className={`p-2 rounded outline-none ${
+                darkMode ? "bg-[#2b2d33] text-white" : "bg-gray-200 text-black"
+              } ${!editMode && "opacity-60 cursor-not-allowed"}`}
             />
             <input
               name="kodepos"
@@ -167,23 +203,23 @@ const Settings = () => {
               value={userData.kodepos}
               onChange={handleChange}
               placeholder="Kode Pos"
-              className={`col-span-2 p-2 rounded text-white outline-none ${
-                darkMode ? "bg-[#2b2d33]" : "bg-gray-300 text-black"
-              } ${!editMode && "opacity-50"}`}
+              className={`col-span-2 p-2 rounded outline-none ${
+                darkMode ? "bg-[#2b2d33] text-white" : "bg-gray-200 text-black"
+              } ${!editMode && "opacity-60 cursor-not-allowed"}`}
             />
           </div>
 
           <div className="flex space-x-4 mt-6">
             <button
               onClick={() => setEditMode(!editMode)}
-              className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded"
+              className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded transition-all"
             >
               {editMode ? "Cancel" : "Edit Details"}
             </button>
             {editMode && (
               <button
                 onClick={handleSave}
-                className="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded"
+                className="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded transition-all"
               >
                 Save Changes
               </button>
