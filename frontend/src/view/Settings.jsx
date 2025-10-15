@@ -4,43 +4,28 @@ import axios from "axios";
 const Settings = () => {
   const [darkMode, setDarkMode] = useState(true);
   const [editMode, setEditMode] = useState(false);
-
   const [userData, setUserData] = useState({
     id: "",
     name: "",
     email: "",
+    password: "",
     nomer: "",
     kecamatan: "",
     kelurahan: "",
     kodepos: "",
   });
 
-  // Ganti ke false nanti kalau backend temanmu sudah aktif
-  const SIMULASI_MODE = true;
   const API_URL = "http://127.0.0.1:8000/api/users";
 
   useEffect(() => {
-    if (SIMULASI_MODE) {
-      console.log("🔹 SIMULASI MODE AKTIF: Data dummy digunakan.");
-      // Data dummy supaya tetap muncul
-      setUserData({
-        id: 1,
-        name: "Hidayah Muhammad Fadillah",
-        email: "hidayah@example.com",
-        nomer: "08123456789",
-        kecamatan: "Kebayoran Baru",
-        kelurahan: "Gandaria",
-        kodepos: "12140",
-      });
-      return;
-    }
-
     axios
-      .get(`${API_URL}/1`)
+      .get(API_URL)
       .then((res) => {
-        setUserData(res.data);
+        if (Array.isArray(res.data) && res.data.length > 0) {
+          setUserData(res.data[res.data.length - 1]);
+        }
       })
-      .catch((err) => console.error("❌ Gagal ambil data:", err));
+      .catch((err) => console.error("Gagal ambil data:", err));
   }, []);
 
   const handleChange = (e) => {
@@ -48,37 +33,40 @@ const Settings = () => {
     setUserData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // ✅ Simpan data ke backend (PUT /api/users/{id})
   const handleSave = async () => {
-    if (SIMULASI_MODE) {
-      console.log("🔹  Data disimpan:", userData);
-      alert("✅  Data berhasil diperbarui!");
-      setEditMode(false);
-      return;
-    }
-
     try {
-      console.log("Data dikirim ke backend:", userData);
-
-      await axios.put(`${API_URL}/${userData.id}`, {
+      const payload = {
         name: userData.name,
         email: userData.email,
+        password: userData.password,
         nomer: userData.nomer,
         kecamatan: userData.kecamatan,
         kelurahan: userData.kelurahan,
         kodepos: userData.kodepos,
-      });
+      };
 
-      alert("✅ Data berhasil diperbarui!");
+      console.log("Mengirim data ke backend:", payload);
+
+      const response = await axios.post(API_URL, payload);
+
+      console.log("Respon backend:", response.data);
+      alert("Data berhasil disimpan ke backend.");
+      setUserData(response.data);
       setEditMode(false);
     } catch (error) {
-      console.error("❌ Gagal update data:", error.response || error);
-      alert(
-        "❌ Gagal menyimpan perubahan!\n" +
-          (error.response?.data?.message ||
-            JSON.stringify(error.response?.data) ||
-            "Periksa console untuk detail.")
-      );
+      console.error("Gagal menyimpan data:", error.response || error);
+
+      if (error.response?.status === 422) {
+        alert("Validasi gagal. Pastikan semua field terisi dengan benar.");
+      } else if (error.response?.status === 500) {
+        alert("Terjadi kesalahan pada server.");
+      } else if (error.response?.data?.message?.includes("Duplicate entry")) {
+        alert("Email sudah terdaftar. Gunakan email lain.");
+      } else {
+        alert(
+          "Gagal menyimpan data baru. Periksa console untuk detail error."
+        );
+      }
     }
   };
 
@@ -88,10 +76,9 @@ const Settings = () => {
         darkMode ? "bg-[#121212] text-white" : "bg-gray-100 text-black"
       }`}
     >
-      <h1 className="text-3xl font-bold mb-8">⚙️ Settings</h1>
+      <h1 className="text-3xl font-bold mb-8">Settings</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* --- CARD PROFIL --- */}
         <div
           className={`${
             darkMode ? "bg-[#1f2025]" : "bg-white"
@@ -138,74 +125,76 @@ const Settings = () => {
           </div>
         </div>
 
-        {/* --- FORM EDIT --- */}
         <div
           className={`${
             darkMode ? "bg-[#1f2025]" : "bg-white"
           } rounded-2xl p-6 shadow-lg`}
         >
-          <h2 className="font-semibold mb-5">User Settings</h2>
+          <h2 className="font-semibold mb-5">Tambah / Ubah User</h2>
 
           <div className="grid grid-cols-2 gap-4">
             <input
               name="name"
-              disabled={!editMode}
               value={userData.name}
               onChange={handleChange}
               placeholder="Nama Lengkap"
               className={`col-span-2 p-2 rounded outline-none ${
                 darkMode ? "bg-[#2b2d33] text-white" : "bg-gray-200 text-black"
-              } ${!editMode && "opacity-60 cursor-not-allowed"}`}
+              }`}
             />
             <input
               name="email"
-              disabled={!editMode}
               value={userData.email}
               onChange={handleChange}
               placeholder="Email"
               className={`col-span-2 p-2 rounded outline-none ${
                 darkMode ? "bg-[#2b2d33] text-white" : "bg-gray-200 text-black"
-              } ${!editMode && "opacity-60 cursor-not-allowed"}`}
+              }`}
+            />
+            <input
+              name="password"
+              value={userData.password}
+              onChange={handleChange}
+              placeholder="Password Unik"
+              className={`col-span-2 p-2 rounded outline-none ${
+                darkMode ? "bg-[#2b2d33] text-white" : "bg-gray-200 text-black"
+              }`}
             />
             <input
               name="nomer"
-              disabled={!editMode}
               value={userData.nomer}
               onChange={handleChange}
               placeholder="Nomor Telepon"
               className={`col-span-2 p-2 rounded outline-none ${
                 darkMode ? "bg-[#2b2d33] text-white" : "bg-gray-200 text-black"
-              } ${!editMode && "opacity-60 cursor-not-allowed"}`}
+              }`}
             />
             <input
               name="kecamatan"
-              disabled={!editMode}
               value={userData.kecamatan}
               onChange={handleChange}
               placeholder="Kecamatan"
               className={`p-2 rounded outline-none ${
                 darkMode ? "bg-[#2b2d33] text-white" : "bg-gray-200 text-black"
-              } ${!editMode && "opacity-60 cursor-not-allowed"}`}
+              }`}
             />
             <input
               name="kelurahan"
-              disabled={!editMode}
               value={userData.kelurahan}
               onChange={handleChange}
               placeholder="Kelurahan"
               className={`p-2 rounded outline-none ${
                 darkMode ? "bg-[#2b2d33] text-white" : "bg-gray-200 text-black"
-              } ${!editMode && "opacity-60 cursor-not-allowed"}`}
+              }`}
             />
             <input
               name="kodepos"
-              disabled={!editMode}
               value={userData.kodepos}
               onChange={handleChange}
               placeholder="Kode Pos"
               className={`col-span-2 p-2 rounded outline-none ${
                 darkMode ? "bg-[#2b2d33] text-white" : "bg-gray-200 text-black"
-              } ${!editMode && "opacity-60 cursor-not-allowed"}`}
+              }`}
             />
           </div>
 
@@ -214,14 +203,14 @@ const Settings = () => {
               onClick={() => setEditMode(!editMode)}
               className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded transition-all"
             >
-              {editMode ? "Cancel" : "Edit Details"}
+              {editMode ? "Batal" : "Tambah User"}
             </button>
             {editMode && (
               <button
                 onClick={handleSave}
                 className="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded transition-all"
               >
-                Save Changes
+                Simpan Data
               </button>
             )}
           </div>

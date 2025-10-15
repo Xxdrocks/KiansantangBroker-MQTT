@@ -15,7 +15,7 @@ const CustomTooltip = ({ active, payload, label }) => {
     return (
       <div className="bg-gray-900/90 p-3 rounded-lg shadow-lg border border-gray-700 text-white text-sm">
         <p className="font-semibold">{label}</p>
-        <p>{payload[0].value} kWh</p>
+        <p>{payload[0].value} CO2</p>
       </div>
     );
   }
@@ -34,17 +34,17 @@ const OverviewPribadi = () => {
 
   const weeklyData = data.slice(0, 7).map((item) => ({
     name: item.timestamp,
-    kWh: item.energy,
+    CO2: item.CO2,
   }));
 
   const monthlyData = data.slice(0, 30).map((item) => ({
     name: item.timestamp,
-    kWh: item.energy,
+    CO2: item.CO2,
   }));
 
   const yearlyData = data.slice(0, 365).map((item) => ({
     name: item.timestamp,
-    kWh: item.energy,
+    CO2: item.CO2,
   }));
 
   const renderChart = (chartData, color) => (
@@ -62,7 +62,7 @@ const OverviewPribadi = () => {
         <Tooltip content={<CustomTooltip />} />
         <Area
           type="monotone"
-          dataKey="kWh"
+          dataKey="CO2"
           stroke={color}
           strokeWidth={2.5}
           fillOpacity={1}
