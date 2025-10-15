@@ -16,6 +16,10 @@ return new class extends Migration
         $table->string('name');
         $table->string('email')->unique();
         $table->string('password');
+        $table->integer('nomer');
+        $table->string('kecamatan');
+        $table->string('kelurahan');
+        $table->integer('kodepos');
         $table->timestamps();
     });
     }
