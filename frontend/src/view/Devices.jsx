@@ -3,79 +3,62 @@ import { Tv, Refrigerator, Lightbulb } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Devices = () => {
-  const [devices, setDevices] = useState([
+  const [devices] = useState([
     {
       id: 1,
       name: "TV",
       sensor: "Carbon",
-      status: true,
-      daily: "150 kWh",
-      weekly: "800 kWh",
-      monthly: "3.2 MWh",
+      daily: "150 CO2",
+      weekly: "800 CO2",
+      monthly: "3200 CO2",
       icon: <Tv size={24} />,
     },
     {
       id: 2,
       name: "Kulkas",
       sensor: "Carbon",
-      status: false,
-      daily: "90 kWh",
-      weekly: "650 kWh",
-      monthly: "2.5 MWh",
+      daily: "90 CO2",
+      weekly: "650 CO2",
+      monthly: "2500 CO2",
       icon: <Refrigerator size={24} />,
     },
     {
       id: 3,
       name: "Lampu Ruang Tamu",
       sensor: "Carbon",
-      status: true,
-      daily: "50 kWh",
-      weekly: "300 kWh",
-      monthly: "1.1 MWh",
+      daily: "50 CO2",
+      weekly: "300 CO2",
+      monthly: "1100 CO2",
       icon: <Lightbulb size={24} />,
     },
   ]);
-
-  const toggleDevice = (id) => {
-    setDevices((prev) =>
-      prev.map((device) =>
-        device.id === id ? { ...device, status: !device.status } : device
-      )
-    );
-  };
 
   return (
     <div className="p-10 min-h-screen bg-[#0E1014] text-white">
       <h1 className="text-3xl font-bold mb-8 text-center">Devices</h1>
 
-       
       <div className="grid sm:grid-cols-3 gap-4 mb-10">
         <div className="bg-[#171B23]/80 rounded-2xl p-4 text-center">
           <p className="text-gray-400 text-sm">Total Devices</p>
           <p className="text-2xl font-bold">{devices.length}</p>
         </div>
         <div className="bg-[#171B23]/80 rounded-2xl p-4 text-center">
-          <p className="text-gray-400 text-sm">Active Devices</p>
-          <p className="text-2xl font-bold text-green-400">
-            {devices.filter((d) => d.status).length}
-          </p>
+          <p className="text-gray-400 text-sm">Total Sensor Type</p>
+          <p className="text-2xl font-bold text-blue-400">1</p>
         </div>
         <div className="bg-[#171B23]/80 rounded-2xl p-4 text-center">
-          <p className="text-gray-400 text-sm">Inactive Devices</p>
-          <p className="text-2xl font-bold text-red-400">
-            {devices.filter((d) => !d.status).length}
-          </p>
+          <p className="text-gray-400 text-sm">Total Emission (Monthly)</p>
+          <p className="text-2xl font-bold text-green-400">6.8 CO2</p>
         </div>
       </div>
 
-      {/* Tabel */}
+     
       <div className="overflow-x-auto rounded-2xl bg-[#171B23]/80 shadow-lg">
         <table className="min-w-full border-collapse">
           <thead>
             <tr className="text-left text-gray-300 text-sm uppercase border-b border-gray-700">
               <th className="py-4 px-6 font-semibold">Perangkat</th>
               <th className="py-4 px-6 font-semibold">Sensor</th>
-              <th className="py-4 px-6 font-semibold">Status</th>
               <th className="py-4 px-6 font-semibold">Daily</th>
               <th className="py-4 px-6 font-semibold">Weekly</th>
               <th className="py-4 px-6 font-semibold">Monthly</th>
@@ -99,20 +82,6 @@ const Devices = () => {
                   {device.name}
                 </td>
                 <td className="py-4 px-6">{device.sensor}</td>
-                <td className="py-4 px-6">
-                  <button
-                    onClick={() => toggleDevice(device.id)}
-                    className={`relative inline-flex items-center h-6 w-12 rounded-full transition-colors ${
-                      device.status ? "bg-green-500" : "bg-gray-600"
-                    }`}
-                  >
-                    <span
-                      className={`inline-block h-5 w-5 bg-white rounded-full transform transition ${
-                        device.status ? "translate-x-6" : "translate-x-1"
-                      }`}
-                    />
-                  </button>
-                </td>
                 <td className="py-4 px-6 text-gray-300">{device.daily}</td>
                 <td className="py-4 px-6 text-gray-300">{device.weekly}</td>
                 <td className="py-4 px-6 text-gray-300">{device.monthly}</td>

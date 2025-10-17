@@ -16,7 +16,7 @@ const CustomTooltip = ({ active, payload, label }) => {
     return (
       <div className="bg-gray-900/90 p-3 rounded-lg shadow-lg border border-gray-700 text-white text-sm">
         <p className="font-semibold">{label}</p>
-        <p>{payload[0].value} kWh</p>
+        <p>{payload[0].value} CO2</p>
       </div>
     );
   }
@@ -40,20 +40,20 @@ const OverviewKota = () => {
       name,
       lat: info.lat,
       lng: info.lng,
-      totalKwh: info.daily,
+      totalCO2: info.daily,
       color,
       status,
     };
   });
 
-  const weeklyData = cities.map((c) => ({ name: c.name, kWh: c.totalKwh }));
+  const weeklyData = cities.map((c) => ({ name: c.name, CO2: c.totalCO2 }));
   const monthlyData = cities.map((c) => ({
     name: c.name,
-    kWh: c.totalKwh * 4,
+    C02: c.totalC02 * 4,
   }));
   const yearlyData = cities.map((c) => ({
     name: c.name,
-    kWh: c.totalKwh * 52,
+    CO2: c.totalCO2 * 52,
   }));
 
   const renderChart = (data, color) => (
@@ -71,7 +71,7 @@ const OverviewKota = () => {
         <Tooltip content={<CustomTooltip />} />
         <Area
           type="monotone"
-          dataKey="kWh"
+          dataKey="CO2"
           stroke={color}
           strokeWidth={2.5}
           fillOpacity={1}
@@ -108,7 +108,7 @@ const OverviewKota = () => {
               <Popup>
                 <strong>{city.name}</strong>
                 <br />
-                Total kWh: {city.totalKwh}
+                Total CO2: {city.totalCO2}
                 <br />
                 Status: {city.status}
               </Popup>

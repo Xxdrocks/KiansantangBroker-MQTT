@@ -7,17 +7,17 @@ const Dashboard = () => {
   const { devices } = useData();
   const navigate = useNavigate();
 
-  const getPlugImage = (kwh) => {
-    if (kwh < 100) return "/images/plugswhite.png";
-    else if (kwh < 200) return "/images/plugsyellow.png";
-    else if (kwh < 300) return "/images/plugsorange.png";
+  const getPlugImage = (CO2) => {
+    if (CO2 < 100) return "/images/plugswhite.png";
+    else if (CO2 < 200) return "/images/plugsyellow.png";
+    else if (CO2 < 300) return "/images/plugsorange.png";
     else return "/images/plugsred.png";
   };
 
-  const getStatusLevel = (kwh) => {
-    if (kwh < 100) return "Aman";
-    if (kwh < 200) return "Sedang";
-    if (kwh < 300) return "Bahaya";
+  const getStatusLevel = (CO2) => {
+    if (CO2 < 100) return "Aman";
+    if (CO2 < 200) return "Sedang";
+    if (CO2 < 300) return "Bahaya";
     return "Kritis";
   };
 
@@ -27,9 +27,9 @@ const Dashboard = () => {
         <h1 className="text-3xl font-bold">Dashboard</h1>
       </div>
 
-      {/* Bagian konten utama */}
+     
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Carbon Emission */}
+        
         <div className="bg-gradient-to-r from-[#6A759B] to-[#21273D] rounded-2xl p-6 shadow-lg relative overflow-hidden h-[280px]">
           <div className="flex flex-col z-10 relative">
             <div className="flex items-center bg-white text-black rounded-full px-4 py-1 w-fit">
@@ -44,7 +44,7 @@ const Dashboard = () => {
               <p className="text-[15px] font-medium">Carbon Emission</p>
               <p className="text-[12px] text-gray-300 mt-1">Now</p>
               <h1 className="text-[90px] font-bold mt-3 leading-none">
-                {devices.reduce((sum, d) => sum + parseFloat(d.daily), 0)} kWh
+                {devices.reduce((sum, d) => sum + parseFloat(d.daily), 0)} CO2
               </h1>
             </div>
           </div>
@@ -55,25 +55,25 @@ const Dashboard = () => {
           />
         </div>
 
-        {/* Today's Highlight */}
+       
         <div className="bg-[#1b1d22] rounded-2xl p-6 shadow-md">
           <h2 className="text-[20px] font-semibold mb-6">Today's Highlight</h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
             {devices.map((device) => {
-              const kwhValue = parseFloat(device.daily);
+              const CO2Value = parseFloat(device.daily);
               return (
                 <div
                   key={device.id}
                   className="flex flex-col items-center bg-[#2a2d35] rounded-2xl py-4 px-3 hover:scale-105 transition-all"
                 >
                   <img
-                    src={getPlugImage(kwhValue)}
+                    src={getPlugImage(CO2Value)}
                     className="w-20 mb-2"
                     alt="plug icon"
                   />
                   <p className="text-[13px] font-semibold">{device.name}</p>
                   <p className="text-[12px] text-gray-400">
-                    {getStatusLevel(kwhValue)}
+                    {getStatusLevel(CO2Value)}
                   </p>
                   <p className="text-[17px] font-bold mt-1">{device.daily}</p>
                 </div>
@@ -83,7 +83,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* 7 Days Forecast */}
+    
       <div className="mt-8 bg-[#1b1d22] rounded-2xl p-6 shadow-md">
         <h2 className="text-[20px] font-semibold mb-5">7 Days Forecast</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
