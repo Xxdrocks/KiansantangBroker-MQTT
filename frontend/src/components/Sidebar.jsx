@@ -7,6 +7,7 @@ import {
   Settings,
   User,
   Activity,
+  BotIcon,
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -17,6 +18,7 @@ const Sidebar = () => {
     { icon: <Home size={22} />, label: "Dashboard", path: "/" },
     { icon: <BarChart2 size={22} />, label: "Overview", path: "/overview" },
     { icon: <Activity size={22} />, label: "Sensor", path: "/sensor" },
+    { icon: <BotIcon size={22} />, label: "Chatbot", path: "/chatbot" },
     { icon: <Bell size={22} />, label: "Notification", path: "/notification" },
     { icon: <Settings size={22} />, label: "Settings", path: "/settings" },
     { icon: <User size={22} />, label: "Profile", path: "/profile" },

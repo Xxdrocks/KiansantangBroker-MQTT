@@ -10,6 +10,7 @@ import Settings from "../view/Settings";
 import Profile from "../view/Profile";
 import OverviewPribadi from "../view/Overview/OverviewPribadi";
 import OverviewKota from "../view/Overview/OverviewKota";
+import ChatbotCarbon from "../components/Chatbot";
 
 
 const AppRouter = () => {
@@ -27,6 +28,7 @@ const AppRouter = () => {
                     <Route path="/overview" element={<Overview />} />
                     <Route path="/sensor" element={<Sensor />} />
                     <Route path="/notification" element={<Notification />} />
+                    <Route path="/chatbot" element={<ChatbotCarbon />} />
                     <Route path="/settings" element={<Settings />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route

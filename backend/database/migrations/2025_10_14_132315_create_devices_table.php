@@ -14,9 +14,7 @@ return new class extends Migration
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->float('daily');
-            $table->float('weekly');
-            $table->float('monthly');
+            $table->timestamps();
         });
     }
 

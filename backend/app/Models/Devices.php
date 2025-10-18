@@ -3,13 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Devices extends Model
 {
-    protected $fillable = [
-        'name',
-        'daily',
-        'weekly',
-        'monthly',
-    ];
+  use HasFactory;
+    protected $fillable = [ 'name'];
 }
