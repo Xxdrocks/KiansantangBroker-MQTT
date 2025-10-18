@@ -16,7 +16,6 @@ const Sensor = () => {
     <div className="p-10 min-h-screen bg-[#0E1014] text-white">
       <h1 className="text-3xl font-bold mb-8 text-center">Sensor</h1>
 
-      {/* Statistik Sensor */}
       <div className="grid sm:grid-cols-3 gap-4 mb-10">
         <div className="bg-[#171B23]/80 rounded-2xl p-5 text-center">
           <p className="text-gray-400 text-sm">Total Sensor</p>
@@ -36,7 +35,6 @@ const Sensor = () => {
         </div>
       </div>
 
-      {/* Tabel Sensor */}
       <div className="overflow-x-auto rounded-2xl bg-[#171B23]/80 shadow-lg">
         <table className="min-w-full border-collapse">
           <thead>

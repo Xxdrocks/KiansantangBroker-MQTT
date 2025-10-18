@@ -88,6 +88,7 @@ const OverviewPribadi = () => {
     </ResponsiveContainer>
   );
 
+
   const SensorChart = (data) => (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart data={data}>
@@ -129,7 +130,7 @@ const OverviewPribadi = () => {
       </section>
 
       <section className="bg-[#1e1f25] p-6 rounded-2xl shadow">
-        <h2 className="text-lg font-semibold mb-4">Sensor Overview</h2>
+        <h2 className="text-lg font-semibold mb-4">Other Overview</h2>
         <div className="h-96">{SensorChart(sensors)}</div>
       </section>
     </div>

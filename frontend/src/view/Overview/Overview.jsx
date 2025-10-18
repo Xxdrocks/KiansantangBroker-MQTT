@@ -8,22 +8,20 @@ const Overview = () => {
 
   return (
     <div className="p-4 sm:p-6 md:p-8 text-white min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
-      {/* Title */}
-      <h1 className="text-2xl sm:text-3xl font-bold mb-5 sm:mb-6 text-center">
-        Overview
-      </h1>
+      {/* <h1 className="text-2xl sm:text-3xl font-bold mb-5 sm:mb-6 text-center">
+       Your Dashboard
+      </h1> */}
 
-      {/* Tabs */}
       <div className="flex justify-center mb-6 sm:mb-8 relative">
         <div className="flex bg-gray-800 rounded-xl shadow-lg p-1 w-full max-w-[320px] sm:max-w-[400px] justify-between">
           {["personal", "city"].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`relative flex-1 text-center px-3 sm:px-6 py-2 font-semibold rounded-lg transition-all duration-300 ${
+              className={`relative flex-1 text-center px-3 sm:px-6 py-2 font-semibold rounded-lg transition-all duration-300  ${
                 activeTab === tab
                   ? "text-white"
-                  : "text-gray-400 hover:text-white"
+                  : "text-gray-400 hover:text-white cursor-pointer"
               }`}
             >
               {tab === "personal" ? "Pribadi" : "Kota"}
@@ -39,7 +37,6 @@ const Overview = () => {
         </div>
       </div>
 
-      {/* Content Section */}
       <div className="bg-gray-800/60 backdrop-blur-md rounded-2xl shadow-xl p-4 sm:p-6">
         <AnimatePresence mode="wait">
           {activeTab === "personal" ? (

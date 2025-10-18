@@ -16,7 +16,6 @@ const Sidebar = () => {
   const menuItems = [
     { icon: <Home size={22} />, label: "Dashboard", path: "/" },
     { icon: <BarChart2 size={22} />, label: "Overview", path: "/overview" },
-    { icon: <Cpu size={22} />, label: "Devices", path: "/devices" },
     { icon: <Activity size={22} />, label: "Sensor", path: "/sensor" },
     { icon: <Bell size={22} />, label: "Notification", path: "/notification" },
     { icon: <Settings size={22} />, label: "Settings", path: "/settings" },
@@ -25,7 +24,7 @@ const Sidebar = () => {
 
   return (
     <aside
-      className="fixed top-13 left-5 h-[90 vh] w-24 bg-gradient-to-b from-[#2a2d35] to-[#1b1d22]
+      className="fixed top-7 left-5 h-[90 vh] w-24 bg-gradient-to-b from-[#2a2d35] to-[#1b1d22]
      rounded-3xl shadow-lg z-40 flex flex-col items-center py-12 space-y-8"
     >
       {menuItems.map((item, index) => {
