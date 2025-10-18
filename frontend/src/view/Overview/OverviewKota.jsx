@@ -1,15 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
-  AreaChart,
-  Area,
-  XAxis,
-  YAxis,
-  Tooltip,
-  CartesianGrid,
-  ResponsiveContainer,
+  AreaChart, Area, XAxis, YAxis, Tooltip,
+  CartesianGrid, ResponsiveContainer,
 } from "recharts";
-import { MapContainer, TileLayer, CircleMarker, Popup } from "react-leaflet";
-import { useData } from "../../context/DataContext";
+import { MapContainer, TileLayer, CircleMarker, Popup, useMap } from "react-leaflet";
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
@@ -23,38 +17,32 @@ const CustomTooltip = ({ active, payload, label }) => {
   return null;
 };
 
+const ChangeMapView = ({ coords }) => {
+  const map = useMap();
+  if (coords) map.setView(coords, 13);
+  return null;
+};
+
 const OverviewKota = () => {
-  const { cityOverview } = useData();
+  const [coords, setCoords] = useState(null);
+  const [error, setError] = useState(null);
 
-  const cities = Object.entries(cityOverview).map(([name, info]) => {
-    let color = "green";
-    let status = "Aman";
-    if (info.daily > 300) {
-      color = "red";
-      status = "Bahaya";
-    } else if (info.daily > 200) {
-      color = "orange";
-      status = "Sedang";
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => setCoords([pos.coords.latitude, pos.coords.longitude]),
+        (err) => setError("Tidak bisa mendapatkan lokasi: " + err.message)
+      );
+    } else {
+      setError("Browser kamu tidak mendukung Geolocation API.");
     }
-    return {
-      name,
-      lat: info.lat,
-      lng: info.lng,
-      totalCO2: info.daily,
-      color,
-      status,
-    };
-  });
+  }, []);
 
-  const weeklyData = cities.map((c) => ({ name: c.name, CO2: c.totalCO2 }));
-  const monthlyData = cities.map((c) => ({
-    name: c.name,
-    C02: c.totalC02 * 4,
-  }));
-  const yearlyData = cities.map((c) => ({
-    name: c.name,
-    CO2: c.totalCO2 * 52,
-  }));
+  const dummyData = [
+    { name: "CO2 Mingguan", CO2: 200 },
+    { name: "CO2 Bulanan", CO2: 800 },
+    { name: "CO2 Tahunan", CO2: 10200 },
+  ];
 
   const renderChart = (data, color) => (
     <ResponsiveContainer width="100%" height="100%">
@@ -85,52 +73,36 @@ const OverviewKota = () => {
     <div className="space-y-6">
       <h1 className="text-2xl font-bold mb-4">Overview Kota</h1>
 
-     
       <section className="bg-[#1e1f25] p-6 rounded-2xl shadow">
-        <h2 className="text-lg font-semibold mb-4">Peta Kondisi Kota</h2>
-        <MapContainer
-          center={[-2.5, 117.5]}
-          zoom={5}
-          className="w-full h-96 rounded-xl"
-        >
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution="© OpenStreetMap contributors"
-          />
-          {cities.map((city, i) => (
+        <h2 className="text-lg font-semibold mb-4">Lokasi Saat Ini</h2>
+        {error && <p className="text-red-400">{error}</p>}
+        {!coords && !error && <p className="text-gray-400">Mengambil lokasi...</p>}
+        {coords && (
+          <MapContainer center={coords} zoom={13} className="w-full h-96 rounded-xl">
+            <ChangeMapView coords={coords} />
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
             <CircleMarker
-              key={i}
-              center={[city.lat, city.lng]}
+              center={coords}
               radius={12}
-              color={city.color}
+              color="blue"
+              fillColor="blue"
               fillOpacity={0.7}
             >
               <Popup>
-                <strong>{city.name}</strong>
+                <strong>Lokasi Laptop Kamu</strong>
                 <br />
-                Total CO2: {city.totalCO2}
-                <br />
-                Status: {city.status}
+                Lat: {coords[0].toFixed(5)}, Lng: {coords[1].toFixed(5)}
               </Popup>
             </CircleMarker>
-          ))}
-        </MapContainer>
+          </MapContainer>
+        )}
       </section>
 
-      
       <section className="bg-[#1e1f25] p-6 rounded-2xl shadow">
         <h2 className="text-lg font-semibold mb-4">Weekly Overview</h2>
-        <div className="h-64">{renderChart(weeklyData, "#00c8ff")}</div>
-      </section>
-
-      <section className="bg-[#1e1f25] p-6 rounded-2xl shadow">
-        <h2 className="text-lg font-semibold mb-4">Monthly Overview</h2>
-        <div className="h-64">{renderChart(monthlyData, "#32e3b3")}</div>
-      </section>
-
-      <section className="bg-[#1e1f25] p-6 rounded-2xl shadow">
-        <h2 className="text-lg font-semibold mb-4">Yearly Overview</h2>
-        <div className="h-64">{renderChart(yearlyData, "#0affb8")}</div>
+        <div className="h-64">{renderChart(dummyData, "#00c8ff")}</div>
       </section>
     </div>
   );
