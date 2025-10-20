@@ -31,7 +31,6 @@ const Dashboard = () => {
   const [city, setCity] = useState("Mengambil lokasi...");
   const [error, setError] = useState("");
 
-  // === Ambil data emisi setiap 2 detik ===
   useEffect(() => {
     loadData();
     const interval = setInterval(loadData, 2000);
@@ -50,7 +49,6 @@ const Dashboard = () => {
     }
   };
 
-  // === Geolocation ===
   useEffect(() => {
     if (!navigator.geolocation) {
       setError("Browser tidak mendukung geolokasi.");
@@ -80,7 +78,6 @@ const Dashboard = () => {
     }
   };
 
-  // === Utility ===
   const getPlugImage = (co2) => {
     if (co2 < 100) return "/images/plugswhite.png";
     if (co2 < 200) return "/images/plugsyellow.png";
@@ -95,9 +92,8 @@ const Dashboard = () => {
     return "Kritis";
   };
 
-  // === Chart Harian (CO₂) ===
   const daily = records
-    .slice(-24) // ambil 24 data terakhir (anggap per jam)
+    .slice(-24) 
     .map((r) => ({
       name: r.timestamp?.split(" ")[1] || "Jam",
       CO2: r.CO2,
@@ -151,9 +147,7 @@ const Dashboard = () => {
         <h1 className="text-2xl sm:text-3xl font-bold">Dashboard Sensor </h1>
       </div>
 
-      {/* --- Bagian Atas --- */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Emisi Card */}
         <div className="bg-gradient-to-r from-[#6A759B] to-[#21273D] rounded-2xl p-6 shadow-lg relative overflow-hidden min-h-[240px] sm:h-[280px]">
           <div className="relative z-10">
             <div className="flex items-center bg-white text-black rounded-full px-4 py-1 w-fit text-sm">
@@ -177,7 +171,6 @@ const Dashboard = () => {
           />
         </div>
 
-        {/* Highlight */}
         <div className="bg-[#1b1d22] rounded-2xl p-6 shadow-md">
           <h2 className="text-xl font-semibold mb-6">Today's Highlight</h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
@@ -196,7 +189,6 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* --- Chart Harian --- */}
       <section className="bg-[#1e1f25] p-6 rounded-2xl shadow mt-8">
         <h2 className="text-lg font-semibold mb-4">Daily CO₂ Overview</h2>
         <div className="h-64">{CO2Chart(daily, "#00c8ff")}</div>

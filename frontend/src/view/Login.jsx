@@ -15,10 +15,8 @@ const Login = () => {
         password,
       });
 
-      // Tampilkan response untuk debugging
       console.log("Response:", res);
 
-      // Pastikan backend return 200 atau 201
       if (res.status === 200 || res.status === 201) {
         setMessage(res.data.message || "Login berhasil!");
         console.log("User data:", res.data.user);
@@ -29,7 +27,6 @@ const Login = () => {
     } catch (err) {
       console.error("Login error:", err.response || err.message);
 
-      // Coba tampilkan pesan error spesifik dari backend
       if (err.response) {
         setMessage(
           err.response.data.message ||

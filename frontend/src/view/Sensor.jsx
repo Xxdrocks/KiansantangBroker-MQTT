@@ -10,7 +10,6 @@ const Sensor = () => {
   const [editingId, setEditingId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Fetch data perangkat
   const fetchDevices = async () => {
     try {
       const res = await axios.get(API_URL);
@@ -24,7 +23,6 @@ const Sensor = () => {
     fetchDevices();
   }, []);
 
-  // Tambah atau update perangkat
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -42,14 +40,12 @@ const Sensor = () => {
     }
   };
 
-  // Buka modal untuk edit
   const handleEdit = (device) => {
     setFormData({ name: device.name });
     setEditingId(device.id);
     setIsModalOpen(true);
   };
 
-  // Hapus perangkat
   const handleDelete = async (id) => {
     if (!window.confirm("Yakin ingin menghapus perangkat ini?")) return;
     try {
@@ -60,7 +56,6 @@ const Sensor = () => {
     }
   };
 
-  // Buka modal tambah
   const openAddModal = () => {
     setEditingId(null);
     setFormData({ name: "" });
@@ -71,7 +66,6 @@ const Sensor = () => {
     <div className="p-10 min-h-screen bg-[#0E1014] text-white">
       <h1 className="text-3xl font-bold mb-8 text-center">Perangkat Sensor</h1>
 
-      {/* Kartu Total */}
       <div className="grid sm:grid-cols-3 gap-4 mb-10">
         <div className="bg-[#171B23]/80 rounded-2xl p-5 text-center">
           <p className="text-gray-400 text-sm">Total Perangkat</p>
@@ -89,7 +83,6 @@ const Sensor = () => {
         </div>
       </div>
 
-      {/* Tombol Tambah */}
       <div className="flex justify-end mb-4">
         <button
           onClick={openAddModal}
@@ -99,7 +92,6 @@ const Sensor = () => {
         </button>
       </div>
 
-      {/* Tabel Perangkat */}
       <div className="overflow-x-auto rounded-2xl bg-[#171B23]/80 shadow-lg">
         <table className="min-w-full border-collapse">
           <thead>
@@ -141,12 +133,10 @@ const Sensor = () => {
         </table>
       </div>
 
-      {/* Popup Modal Tambah/Edit */}
-     {/* Popup Modal Tambah/Edit */}
+
 <AnimatePresence>
   {isModalOpen && (
     <>
-      {/* Background Overlay */}
       <motion.div
         className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
         initial={{ opacity: 0 }}
@@ -154,14 +144,12 @@ const Sensor = () => {
         exit={{ opacity: 0 }}
         onClick={() => setIsModalOpen(false)}
       >
-        {/* Modal Box */}
         <motion.div
           className="bg-[#171B23] rounded-2xl p-6 w-80 text-white shadow-xl relative"
           initial={{ scale: 0.8, opacity: 0, y: -20 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.8, opacity: 0, y: -20 }}
-          onClick={(e) => e.stopPropagation()} // biar klik di dalam modal ga nutup
-        >
+          onClick={(e) => e.stopPropagation()} >
           <h2 className="text-xl font-semibold mb-4 text-center">
             {editingId ? "Edit Perangkat" : "Tambah Perangkat"}
           </h2>

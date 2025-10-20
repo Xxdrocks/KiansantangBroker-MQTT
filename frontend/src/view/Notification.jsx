@@ -5,7 +5,6 @@ const Notification = () => {
   const [records, setRecords] = useState([]);
   const [notifications, setNotifications] = useState([]);
 
-  // Ambil data dari API tiap 5 detik
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -23,7 +22,6 @@ const Notification = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Tentukan level berdasarkan CO₂
   const getLevel = (value) => {
     if (value < 50) return "Aman";
     if (value < 100) return "Sedang";
@@ -31,7 +29,6 @@ const Notification = () => {
     return "Kritis";
   };
 
-  // Warna badge
   const getColor = (level) => {
     switch (level) {
       case "Aman":
@@ -47,7 +44,6 @@ const Notification = () => {
     }
   };
 
-  // Buat pesan notifikasi otomatis
   const generateNotifications = (data) => {
     const notifList = [];
 
@@ -64,7 +60,6 @@ const Notification = () => {
       else if (level === "Kritis")
         message = "Emisi sangat tinggi ⚠️. Potensi bahaya lingkungan!";
 
-      // hanya tampilkan jika melebihi 50
       if (co2 > 50) {
         notifList.push({
           id: r.id,
@@ -76,11 +71,9 @@ const Notification = () => {
       }
     });
 
-    // urutkan dari terbaru
     setNotifications(notifList.reverse());
   };
 
-  // Hitung waktu relatif (x menit lalu)
   const timeAgo = (timestamp) => {
     if (!timestamp) return "";
     const now = new Date();
@@ -96,7 +89,7 @@ const Notification = () => {
     <div className="p-10 min-h-screen text-white bg-[#0E1014]">
       <h1 className="text-3xl font-bold mb-8">Notifikasi Harian</h1>
 
-      {/* Legend */}
+   
       <div className="flex items-center space-x-3 mb-6">
         <span className="font-semibold">Level Bahaya</span>
         <div className="flex space-x-2">
@@ -108,7 +101,6 @@ const Notification = () => {
         </div>
       </div>
 
-      {/* Daftar Notifikasi */}
       {notifications.length === 0 ? (
         <p className="text-gray-400">Belum ada aktivitas berbahaya hari ini </p>
       ) : (

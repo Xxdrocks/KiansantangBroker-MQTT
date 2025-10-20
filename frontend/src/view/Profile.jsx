@@ -3,7 +3,6 @@ import axios from "axios";
 import { FaMapMarkerAlt, FaUserCircle } from "react-icons/fa";
 
 const Profile = () => {
-  // dummy data user
   const user = {
     name: "Pahri Pradana",
     email: "pahri@example.com",
@@ -15,12 +14,10 @@ const Profile = () => {
     joinDate: "2025-04-10",
   };
 
-  // state untuk ambil data device dari database
   const [devices, setDevices] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const API_URL = "http://localhost:8000/api/devices"; // endpoint Laravel kamu
-
+  const API_URL = "http://localhost:8000/api/devices";
   useEffect(() => {
     const fetchDevices = async () => {
       try {
@@ -35,7 +32,6 @@ const Profile = () => {
     fetchDevices();
   }, []);
 
-  // Hitung total emisi
   const totalDaily = devices.reduce(
     (acc, d) => acc + parseFloat(d.daily || 0),
     0
@@ -62,7 +58,7 @@ const Profile = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Kartu Profil */}
+
           <div className="col-span-1 bg-[#1f2025] rounded-2xl p-8 shadow-lg flex flex-col items-center">
             <div className="w-28 h-28 bg-blue-600 rounded-full flex items-center justify-center text-white text-5xl">
               <FaUserCircle />
@@ -89,7 +85,7 @@ const Profile = () => {
             </div>
           </div>
 
-          {/* Statistik */}
+  
           <div className="col-span-2 bg-[#1f2025] rounded-2xl p-8 shadow-lg">
             <h2 className="text-lg font-semibold mb-6">Statistik Sensor</h2>
 
@@ -120,7 +116,6 @@ const Profile = () => {
               </div>
             </div>
 
-            {/* Info Akun */}
             <h2 className="text-lg font-semibold mb-4">Informasi Akun</h2>
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div className="bg-[#2b2d33] p-4 rounded-xl">

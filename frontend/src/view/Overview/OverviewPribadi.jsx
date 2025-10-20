@@ -62,6 +62,8 @@ const OverviewPribadi = () => {
     tempObject: r.tempObject,
   }));
 
+
+
   const CO2Chart = (data, color) => (
     <ResponsiveContainer width="100%" height="100%">
       <AreaChart data={data}>
@@ -73,7 +75,8 @@ const OverviewPribadi = () => {
         </defs>
 
         <CartesianGrid strokeDasharray="3 3" stroke="#333" />
-        <XAxis dataKey="name" stroke="#aaa" />
+        <XAxis dataKey="name" stroke="#aaa"
+          tick={{ fontSize: 13 }} />
         <YAxis stroke="#aaa" />
         <Tooltip content={<TooltipContent />} />
 
@@ -93,7 +96,8 @@ const OverviewPribadi = () => {
     <ResponsiveContainer width="100%" height="100%">
       <LineChart data={data}>
         <CartesianGrid strokeDasharray="3 3" stroke="#333" />
-        <XAxis dataKey="name" stroke="#aaa" />
+        <XAxis dataKey="name" stroke="#aaa"
+          tick={{ fontSize: 13 }} />
         <YAxis stroke="#aaa" />
         <Tooltip content={<TooltipContent />} />
         <Legend />

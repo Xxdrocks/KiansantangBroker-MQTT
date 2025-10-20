@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+* {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+}
+
+*::-webkit-scrollbar {
+    display: none;
+}
+
 @font-face {
     font-family: 'medium';
     src: url('../public/fonts/Montserrat-Medium.ttf');
