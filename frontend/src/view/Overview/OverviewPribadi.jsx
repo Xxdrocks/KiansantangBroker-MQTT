@@ -94,7 +94,7 @@ const OverviewPribadi = () => {
 
   const SensorChart = (data) => (
     <ResponsiveContainer width="100%" height="100%">
-      <LineChart data={data}>
+      <LineChart data={data.slice().reverse()}>
         <CartesianGrid strokeDasharray="3 3" stroke="#333" />
         <XAxis dataKey="name" stroke="#aaa"
           tick={{ fontSize: 13 }} />

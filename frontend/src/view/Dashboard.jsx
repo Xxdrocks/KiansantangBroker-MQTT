@@ -93,7 +93,6 @@ const Dashboard = () => {
   };
 
   const daily = records
-    .slice(-24) 
     .map((r) => ({
       name: r.timestamp?.split(" ")[1] || "Jam",
       CO2: r.CO2,
@@ -101,7 +100,7 @@ const Dashboard = () => {
 
   const CO2Chart = (data, color) => (
     <ResponsiveContainer width="100%" height="100%">
-      <AreaChart data={data}>
+      <AreaChart data={data.slice().reverse()}>
         <defs>
           <linearGradient id={color} x1="0" y1="0" x2="0" y2="1">
             <stop offset="5%" stopColor={color} stopOpacity={0.8} />

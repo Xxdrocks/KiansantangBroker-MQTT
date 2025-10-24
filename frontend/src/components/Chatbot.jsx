@@ -9,7 +9,7 @@ const ChatbotCarbon = () => {
   const [messages, setMessages] = useState([
     {
       sender: "bot",
-      text: "Halo! Aku **OxyBot**, asisten pintar tentang emisi karbon, energi hijau, dan efek rumah kaca!",
+      text: "Halo! Aku OxyBot, asisten pintar tentang emisi karbon, energi hijau, dan efek rumah kaca!",
     },
   ]);
   const [input, setInput] = useState("");
@@ -72,7 +72,7 @@ const ChatbotCarbon = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen text-white font-poppins ">
+    <div className="flex flex-col h-140 text-white font-poppins ">
       <div className="p-5 items-center flex flex-col justify-center gap-5">
         <img src="../images/chatbotlogo.png" alt="Logo" className="w-12" />
         <p className="text-sm text-[#E4EFE7]">
@@ -118,7 +118,7 @@ const ChatbotCarbon = () => {
         {loading && !typingText && (
           <div className="flex justify-start">
             <div className="animate-pulse bg-[#1C222E] px-4 py-3 rounded-2xl text-sm text-gray-400">
-              Mengetik...
+              BIarkan aku berpikir...
             </div>
           </div>
         )}
@@ -133,7 +133,7 @@ const ChatbotCarbon = () => {
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && sendMessage()}
           placeholder="Tulis pertanyaanmu..."
-          className="flex-1 px-4 py-2 bg-[#1C222E] border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+          className="flex-1 px-4 py-2 bg-[#1C222E] border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none "
         />
         <button
           onClick={sendMessage}
