@@ -72,7 +72,7 @@ const Settings = () => {
 
   return (
     <div
-      className={`min-h-screen p-10 transition-all duration-500 ${
+      className={`min-h-screen p-10 tra                                                                                                                                                                                                                                                                                                                                                                                                                                          nsition-all duration-500 ${
         darkMode ? "bg-[#121212] text-white" : "bg-gray-100 text-black"
       }`}
     >
