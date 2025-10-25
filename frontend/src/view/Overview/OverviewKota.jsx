@@ -48,9 +48,9 @@ const OverviewKota = () => {
   };
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold mb-4">Overview Kota</h1>
-      <section className="bg-[#1e1f25] p-6 rounded-2xl shadow">
+    <div className="space-y-6 ">
+      <h1 className="text-2xl font-bold mb-4 hidden xl:flex">Overview Kota</h1>
+      <section className="xl:bg-[#1e1f25] xl:p-6 rounded-2xl shadow">
         <h2 className="text-lg font-semibold mb-4">Lokasi Saat Ini</h2>
         {error && <p className="text-red-400">{error}</p>}
         {!coords && !error && <p className="text-gray-400">Mengambil lokasi...</p>}

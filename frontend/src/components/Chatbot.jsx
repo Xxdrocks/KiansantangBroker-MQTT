@@ -15,7 +15,6 @@ const ChatbotCarbon = () => {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [typingText, setTypingText] = useState("");
-  const chatEndRef = useRef(null);
   const isTypingRef = useRef(false); 
 
   const typeText = async (text) => {
@@ -72,7 +71,7 @@ const ChatbotCarbon = () => {
   };
 
   return (
-    <div className="flex flex-col h-140 text-white font-poppins ">
+    <div className="w-[1000px] flex flex-col h-140 text-white font-poppins ">
       <div className="p-5 items-center flex flex-col justify-center gap-5">
         <img src="../images/chatbotlogo.png" alt="Logo" className="w-12" />
         <p className="text-sm text-[#E4EFE7]">
@@ -118,12 +117,11 @@ const ChatbotCarbon = () => {
         {loading && !typingText && (
           <div className="flex justify-start">
             <div className="animate-pulse bg-[#1C222E] px-4 py-3 rounded-2xl text-sm text-gray-400">
-              BIarkan aku berpikir...
+              Biarkan aku berpikir...
             </div>
           </div>
         )}
 
-        <div ref={chatEndRef} />
       </div>
 
       <div className="p-4 flex items-center gap-3 relative">
@@ -133,7 +131,7 @@ const ChatbotCarbon = () => {
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && sendMessage()}
           placeholder="Tulis pertanyaanmu..."
-          className="flex-1 px-4 py-2 bg-[#1C222E] border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none "
+          className="flex-1 xl:px-4 p-8 py-2 bg-[#1C222E] border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none "
         />
         <button
           onClick={sendMessage}
@@ -142,6 +140,7 @@ const ChatbotCarbon = () => {
           <img src="../images/send.png" className="w-5 absolute right-10"/>
         </button>
       </div>
+      
     </div>
   );
 };

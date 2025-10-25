@@ -63,8 +63,8 @@ const Sensor = () => {
   };
 
   return (
-    <div className="p-10 min-h-screen bg-[#0E1014] text-white">
-      <h1 className="text-3xl font-bold mb-8 text-center">Perangkat Sensor</h1>
+    <div className="flex flex-col xl:w-[1000px] p-10 min-h-screen bg-[#0E1014] text-white">
+      <h1 className="text-3xl font-bold mb-8 text-center hidden xl:flex">Perangkat Sensor</h1>
 
       <div className="grid sm:grid-cols-3 gap-4 mb-10">
         <div className="bg-[#171B23]/80 rounded-2xl p-5 text-center">
@@ -116,13 +116,13 @@ const Sensor = () => {
                 <td className="py-4 px-6 text-center space-x-2">
                   <button
                     onClick={() => handleEdit(item)}
-                    className="px-3 py-1 bg-yellow-500 rounded-lg text-black font-semibold"
+                    className="xl:px-3 px-4 m-2 xl:py-1 bg-yellow-500 rounded-lg text-black font-semibold"
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => handleDelete(item.id)}
-                    className="px-3 py-1 bg-red-600 rounded-lg text-white font-semibold"
+                    className="xl:px-3 px-2 py-1 bg-red-600 rounded-lg text-white font-semibold"
                   >
                     Hapus
                   </button>

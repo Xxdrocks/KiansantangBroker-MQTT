@@ -15,14 +15,13 @@ import ChatbotCarbon from "../components/Chatbot";
 
 const AppRouter = () => {
   return (
-    <BrowserRouter>
       <Routes>
         <Route
           path="/*"
           element={
               <div className="flex">
                 <Sidebar />
-                <div className="flex-1 p-8 ml-28">
+                <div className="flex">
                   <Routes>
                     <Route path="/" element={<Dashboard />} />
                     <Route path="/overview" element={<Overview />} />
@@ -42,7 +41,6 @@ const AppRouter = () => {
           }
         />
       </Routes>
-    </BrowserRouter>
   );
 };
 

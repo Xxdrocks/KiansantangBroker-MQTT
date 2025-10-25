@@ -118,24 +118,24 @@ const OverviewPribadi = () => {
     <div className="space-y-6">
       <h1 className="text-2xl font-bold mb-4">Overview Pribadi</h1>
 
-      <section className="bg-[#1e1f25] p-6 rounded-2xl shadow">
+      <section className="bg-[#1e1f25] p-3 xl:p-6 rounded-2xl shadow">
         <h2 className="text-lg font-semibold mb-4">Weekly Overview</h2>
         <div className="h-64">{CO2Chart(weekly, "#00c8ff")}</div>
       </section>
 
-      <section className="bg-[#1e1f25] p-6 rounded-2xl shadow">
+      <section className="bg-[#1e1f25] p-3 xl:p-6 rounded-2xl shadow">
         <h2 className="text-lg font-semibold mb-4">Monthly Overview</h2>
         <div className="h-64">{CO2Chart(monthly, "#32e3b3")}</div>
       </section>
 
-      <section className="bg-[#1e1f25] p-6 rounded-2xl shadow">
+      <section className="bg-[#1e1f25] p-3 xl:p-6 rounded-2xl shadow">
         <h2 className="text-lg font-semibold mb-4">Yearly Overview</h2>
         <div className="h-64">{CO2Chart(yearly, "#450693")}</div>
       </section>
 
-      <section className="bg-[#1e1f25] p-6 rounded-2xl shadow">
+      <section className="bg-[#1e1f25] p-3 xl:p-6 rounded-2xl shadow">
         <h2 className="text-lg font-semibold mb-4">Other Overview</h2>
-        <div className="h-96">{SensorChart(sensors)}</div>
+        <div className="xl:h-96 h-120">{SensorChart(sensors)}</div>
       </section>
     </div>
   );

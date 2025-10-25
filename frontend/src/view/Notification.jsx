@@ -86,7 +86,7 @@ const Notification = () => {
   };
 
   return (
-    <div className="p-10 min-h-screen text-white bg-[#0E1014]">
+    <div className="xl:w-[1000px] p-10 min-h-screen text-white bg-[#0E1014]">
       <h1 className="text-3xl font-bold mb-8">Notifikasi Harian</h1>
 
    

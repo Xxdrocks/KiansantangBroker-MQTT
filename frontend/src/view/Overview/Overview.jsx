@@ -7,7 +7,7 @@ const Overview = () => {
   const [activeTab, setActiveTab] = useState("personal");
 
   return (
-    <div className="p-4 sm:p-6 md:p-8 text-white min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+    <div className="xl:w-[1000px] w-screen p-10 xl:p-6 text-white min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
       {/* <h1 className="text-2xl sm:text-3xl font-bold mb-5 sm:mb-6 text-center">
        Your Dashboard
       </h1> */}

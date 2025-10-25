@@ -9,6 +9,8 @@ import {
   CartesianGrid,
   ResponsiveContainer,
 } from "recharts";
+import { Icon, User } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const TooltipContent = ({ active, payload, label }) => {
   if (!active || !payload?.length) return null;
@@ -36,6 +38,11 @@ const Dashboard = () => {
     const interval = setInterval(loadData, 2000);
     return () => clearInterval(interval);
   }, []);
+
+
+  const menuItems = [
+    {icon: <User size={22} />,label: "Profile", path: "/Profile" },
+  ]
 
   const loadData = async () => {
     try {
@@ -98,6 +105,8 @@ const Dashboard = () => {
       CO2: r.CO2,
     }));
 
+    
+
   const CO2Chart = (data, color) => (
     <ResponsiveContainer width="100%" height="100%">
       <AreaChart data={data.slice().reverse()}>
@@ -125,7 +134,7 @@ const Dashboard = () => {
 
   if (!data) {
     return (
-      <div className="bg-[#0E1014] min-h-screen flex items-center justify-center text-white text-xl">
+      <div className="bg-[#0E1014] min-h-screen w-[350px] xl:w-[1000px] flex items-center justify-center text-white text-xl">
         Memuat data...
       </div>
     );
@@ -141,13 +150,26 @@ const Dashboard = () => {
   const totalCO2 = data.CO2 ?? 0;
 
   return (
-    <div className="bg-[#0E1014] min-h-screen text-white px-4 sm:px-6 py-6 sm:py-8">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
+    <div className="xl:bg-[#0E1014] w-full xl:min-h-screen text-white p-8 rounded-2xl ">
+      <div className="flex flex-row justify-between xl:items-start items-center mb-8">
         <h1 className="text-2xl sm:text-3xl font-bold">Dashboard Sensor </h1>
+     {menuItems.map((item, index) => {
+               const active = location.pathname === item.path;
+               return (
+                 <Link
+                   key={index}
+                   to={item.path}
+                   className={`xl:hidden flex flex-col items-center transition ${active ? "text-[#4b5bff]" : "text-gray-300 hover:text-[#4b5bff]"
+                     }`}
+                 >
+                   {item.icon}
+                 </Link>
+               );
+             })}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-gradient-to-r from-[#6A759B] to-[#21273D] rounded-2xl p-6 shadow-lg relative overflow-hidden min-h-[240px] sm:h-[280px]">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+        <div className="bg-gradient-to-r from-[#6A759B] to-[#21273D] rounded-2xl p-6 shadow-lg relative overflow-hidden min-h-[240px]">
           <div className="relative z-10">
             <div className="flex items-center bg-white text-black rounded-full px-4 py-1 w-fit text-sm">
               <img src="/icon/location.png" alt="loc" className="w-4 h-4 mr-2" />
@@ -188,8 +210,8 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <section className="bg-[#1e1f25] p-6 rounded-2xl shadow mt-8">
-        <h2 className="text-lg font-semibold mb-4">Daily CO₂ Overview</h2>
+      <section className="bg-[#1e1f25] xl:p-6 rounded-2xl shadow mt-8">
+        <h2 className="text-lg xl:p-0 p-4 font-semibold mb-4">Daily CO₂ Overview</h2>
         <div className="h-64">{CO2Chart(daily, "#00c8ff")}</div>
       </section>
     </div>

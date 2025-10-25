@@ -34,7 +34,7 @@ const Devices = () => {
   ]);
 
   return (
-    <div className="p-10 min-h-screen bg-[#0E1014] text-white">
+    <div className="w-full p-10 min-h-screen bg-[#0E1014] text-white">
       <h1 className="text-3xl font-bold mb-8 text-center">Devices</h1>
 
       <div className="grid sm:grid-cols-3 gap-4 mb-10">
